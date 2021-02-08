@@ -1,0 +1,40 @@
+CREATE DATABASE IF NOT EXISTS api_rest_laravel;
+
+USE api_rest_laravel;
+
+CREATE TABLE Users (
+    User_ID INT(255) AUTO_INCREMENT NOT NULL,
+    Name VARCHAR(50) NOT NULL,
+    Surname VARCHAR(100),
+    Role VARCHAR(20),
+    Email VARCHAR(255) NOT NULL,
+    Password VARCHAR(255) NOT NULL,
+    Description TEXT,
+    Image VARCHAR(255),
+    Create_At DATETIME DEFAULT NULL,
+    Update_AT DATETIME DEFAULT NULL,
+    Remenber_Token VARCHAR(255),
+    CONSTRAINT User_ID PRIMARY KEY (User_ID)
+)ENGINE=InnoDb;
+
+CREATE TABLE Categories (
+    Category_ID INT(255) AUTO_INCREMENT NOT NULL,
+    Name VARCHAR(100),
+    Create_At DATETIME DEFAULT NULL,
+    Update_AT DATETIME DEFAULT NULL,
+    CONSTRAINT Category_ID PRIMARY KEY (Category_ID)
+)ENGINE=InnoDb;
+
+CREATE TABLE Posts (
+    Post_ID INT(255) NOT NULL,
+    User_ID INT(255) NOT NULL,
+    Category_ID INT(255) NOT NULL,
+    Tittle VARCHAR(255) NOT NULL,
+    Content TEXT NOT NULL,
+    Image VARCHAR(255),
+    Create_At DATETIME DEFAULT NULL,
+    Update_AT DATETIME DEFAULT NULL,
+    CONSTRAINT Post_ID PRIMARY KEY (Post_ID),
+    CONSTRAINT User_ID FOREIGN KEY (User_ID) REFERENCES Users (User_ID),
+    CONSTRAINT Category_ID FOREIGN KEY (Category_ID) REFERENCES Categories (Category_ID)
+)ENGINE=InnoDb;
